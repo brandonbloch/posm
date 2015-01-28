@@ -1,5 +1,7 @@
 # POSM: PHP-Only Site Management
 
+[Live Demo](http://bloch.ca/posm/?login) (Username: demodemo/Password: demodemo)
+
 POSM is my vision of what content management software should be. Web designers build beautiful templates for
 software like WordPress, only to have to customize (and often minimize) portions of the back end, create alternate
 stylesheets for content editors, and in many cases, even write a usage guide for helping the non-technical owner
