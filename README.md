@@ -31,9 +31,15 @@ no matter how well it attempts to, can never identically parallel what the publi
 also adds another layer of maintenance, as editor styles can easily become out of sync.
 
 With POSM, the page content itself is made editable using the `contenteditable` HTML5 attribute. Changes made to
-the page content are reflected on save, and what you see is EXACTLY what you get. So far it's an extremely simple
-editor, but it's great. There's also an option to toggle the page code editor, for cases where someone may want to
-manually tweak the HTML output of the visual editor, or maybe just paste in code for some embeddable content.
+the page content are reflected on save, and what you see is EXACTLY what you get. There's also an option to toggle
+a code editor, for cases where someone may want to manually tweak the HTML output of the visual editor, or
+maybe just paste in code for some embeddable content.
+
+At this point in time the visual editor uses the very simple [hallo editor](http://hallojs.org), which works only fairly
+well. I plan to implement a more robust content editing experience that can be easily customized on a per-theme basis
+to enable/disable certain editing options that apply to a specific theme, and perhaps to allow for multiple editable
+areas in a page, which would let site designers build complicated theme designs that are hard for the client to break
+while being easy to customize in places that should be.
 
 ## Damn easy templating
 
