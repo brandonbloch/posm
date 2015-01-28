@@ -11,28 +11,18 @@ Everything should be simple, transparent, and straightforward. The following fea
 
 ## You got back end on my front end
 
-The only thing that shouldn't be obvious is how to log in to the website—if users can't log in, a link shouldn't
-be visible. Everything else is clear once logged in; the back end works right on top of the front end.
+The only thing that isn't obvious is how to log in to the website—this is how it should be, so users don't find the
+login form. All it means is that the site administrator needs to keep track of three things: the login URL (which is
+the installation URL followed by `?login`), their username, and password. Everything else is clear once logged in;
+the back end works right on top of the front end. There isn't anything else they have to remember.
 
-There are options to add pages, manage existing pages, edit the current page, and manage site-wide settings. Other than
-that, and a logout button, there isn't much else to POSM. And there needn't be. The back end is as easy to navigate
-as the website that you design, and the site's owner will have no problem finding the right page to edit.
+Pages can be edited by navigating to them normally and clicking edit in the toolbar. They can also be added, viewed
+in their hierarchy on a simple listing page, and be deleted from this page. The ability to move pages around in
+the hierarchy is an upcoming feature, but as of now pages cannot be moved from their original location in the hierarchy.
 
-## No database?
-
-The owner of the website shouldn't have their content tied to a database just for ease of editing. With POSM, the
-content is kept in the installation directory, so POSM can be moved around from server to server without needing to
-migrate database tables.
-
-It also means that you can edit the files yourself, if you prefer to use a different code editor. Just edit the
-file in place as you would edit a static HTML file.
-
-## Damn easy templating
-
-Writing templates for most themable websites isn't that hard, but I thought I could make it even easier. Writing a
-template for POSM is dead simple, and I plan to write an API reference so that all functions that are available for
-calling in a template are well-documented and easy to access. Until then, see an existing template for examples
-of how easy it is to create a POSM site.
+There is also a simple settings page, and a logout button, and that's it. There isn't much else to POSM, and there needn't
+be. The back end is as easy to navigate as the website that you design, and the site's owner will have no problem finding
+the right page to edit.
 
 ## Inline content editing
 
@@ -44,3 +34,19 @@ With POSM, the page content itself is made editable using the `contenteditable` 
 the page content are reflected on save, and what you see is EXACTLY what you get. So far it's an extremely simple
 editor, but it's great. There's also an option to toggle the page code editor, for cases where someone may want to
 manually tweak the HTML output of the visual editor, or maybe just paste in code for some embeddable content.
+
+## Damn easy templating
+
+Writing templates for most themable websites isn't that hard, but I thought I could make it even easier. Writing a
+template for POSM is dead simple, and I plan to write an API reference so that all functions that are available for
+calling in a template are well-documented and easy to access. Until then, see an existing template for examples
+of how easy it is to create a POSM site.
+
+## No database?
+
+The owner of the website shouldn't have their content tied to a database just for ease of editing. With POSM, the
+content is kept in the installation directory, so POSM can be moved around from server to server without needing to
+migrate database tables.
+
+It also means that you can edit the files yourself, if you prefer to use a different code editor. Just edit the
+file in place as you would edit a static HTML file.
