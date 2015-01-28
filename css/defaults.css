@@ -1,0 +1,827 @@
+/* ADMIN BAR STYLES */
+
+.posm-admin-bar,
+.posm-admin-bar *,
+#posm-settings,
+#posm-manage,
+#posm-add-page,
+#posm-delete-page,
+#posm-setup,
+#posm-login,
+#posm-edit,
+#posm-setting-success,
+#posm-setting-success * {
+	animation : none;
+	backface-visibility : visible;
+	background-attachment : scroll;
+	background-clip : border-box;
+	background-color : transparent;
+	background-image : none;
+	background-origin : padding-box;
+	background-position : 0 0;
+	background-repeat : repeat;
+	background-size : auto auto;
+	border : none;
+	bottom : auto;
+	box-shadow : none;
+	box-sizing : content-box;
+	caption-side : top;
+	clear : none;
+	clip : auto;
+	color : inherit;
+	columns : auto;
+	column-count : auto;
+	column-fill : balance;
+	column-gap : normal;
+	column-rule : medium none currentColor;
+	column-rule-color : currentColor;
+	column-rule-style : none;
+	column-rule-width : none;
+	column-span : 1;
+	column-width : auto;
+	content : normal;
+	counter-increment : none;
+	counter-reset : none;
+	cursor : auto;
+	direction : ltr;
+	display : inline;
+	empty-cells : show;
+	float : none;
+	font-family : Arial, Helvetica, sans-serif;
+	font-size : 16px;
+	font-style : normal;
+	font-variant : normal;
+	font-weight : normal;
+	height : auto;
+	hyphens : none;
+	left : auto;
+	letter-spacing : normal;
+	line-height : normal;
+	list-style : none;
+	margin : 0;
+	max-height : none;
+	max-width : none;
+	min-height : 0;
+	min-width : 0;
+	opacity : 1;
+	orphans : 0;
+	outline : none;
+	overflow : visible;
+	padding : 0;
+	page-break-after : auto;
+	page-break-before : auto;
+	page-break-inside : auto;
+	perspective : none;
+	perspective-origin : 50% 50%;
+	position : static;
+	right : auto;
+	tab-size : 8;
+	table-layout : auto;
+	text-align : inherit;
+	text-align-last : auto;
+	text-decoration : none;
+	text-indent : 0;
+	text-shadow : none;
+	text-transform : none;
+	top : auto;
+	transform : none;
+	transition : none;
+	unicode-bidi : normal;
+	vertical-align : baseline;
+	visibility : visible;
+	white-space : normal;
+	widows : 0;
+	width : auto;
+	word-spacing : normal;
+	z-index : auto;
+}
+
+.posm-admin-bar {
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: black;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	font-weight: normal;
+	z-index: 9999;
+	height: 34px;
+}
+
+.posm-admin-bar div {
+	padding: 0 8px 0;
+}
+
+.posm-admin-bar a {
+	display: inline-block;
+	color: #999;
+	text-decoration: none;
+	padding: 10px 10px 7px;
+	height: 34px;
+	text-shadow: none;
+	line-height: 1px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	margin-left: 2px !important;
+	margin-right: 2px !important;
+}
+
+#posm_admin_btn_home {
+	font-weight: bold;
+}
+
+.posm-admin-bar a:focus,
+.posm-admin-bar a:hover {
+	text-decoration: underline;
+	color: white;
+}
+
+#posm_edit_mode_buttons {
+	position: absolute;
+	top: 30px;
+	right: 20px;
+}
+
+@media all and (min-width: 600px) {
+	#posm_edit_mode_buttons {
+		right: 40px;
+	}
+}
+
+.posm-edit-mode-radio {
+	border: none;
+	height: auto;
+	width: auto;
+	margin: 0;
+	display: none;
+}
+
+.fa-text-hide {
+	position: absolute;
+	top: -999em;
+}
+
+#posm_adminbar_revert_link {
+}
+
+#posm_adminbar_cancel_edit_link {
+	margin-right: 5px !important;
+}
+
+body.posm-edit .posm-admin-bar {
+	background-color: rgba(0, 0, 0, 0.7);
+	background-image: repeating-linear-gradient(315deg, transparent, transparent 35px, rgba(255, 255, 0, 0.8) 35px, rgba(255,255,0,0.8) 70px);
+}
+
+body.posm-edit .posm-admin-bar a {
+	background-color: black;
+	height: 26px;
+	margin-top: 4px;
+	padding-top: 6px;
+	border-radius: 18px;
+}
+
+.posm-edit-mode-label {
+	display: none;
+	text-align: center !important;
+	width: 30px !important;
+	height: 20px !important;
+	padding: 0 !important;
+	line-height: 1px !important;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	color: #999 !important;
+	cursor: pointer;
+	background-color: black;
+	border-radius: 0;
+	border: solid 1px transparent !important;
+}
+
+.posm-edit-mode-label i {
+	cursor: pointer;
+}
+
+.posm-edit-mode-label:hover,
+.posm-edit-mode-label:focus {
+	color: white !important;
+}
+
+.posm-edit-mode-radio:checked + .posm-edit-mode-label {
+	background-color: #999 !important;
+	color: black !important;
+	/*border: solid 1px black !important;*/
+}
+
+/* set almost every property imaginable for the admin bar, so it doesn't accidentally inherit anything! */
+/* - for example, the text-shadow on .posm-admin-bar a:hover/:active */
+
+/* POSM PAGE STYLES */
+
+body.posm-initialize,
+body.posm-settings,
+body.posm-manage
+body.posm-add-page,
+body.posm-delete-page {
+	font-family: Arial, Helvetica, sans-serif;
+	padding-top: 40px;
+	font-size: 18px;
+	-webkit-text-size-adjust: none;
+}
+
+body.logged-in {
+	padding-top: 34px;
+}
+
+#posm-settings,
+#posm-manage,
+#posm-add-page,
+#posm-delete-page,
+#posm-setup,
+#posm-login,
+#posm-edit {
+	display: block;
+	max-width: 420px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 60px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 60px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#posm-manage,
+#posm-add-page,
+#posm-delete-page {
+	max-width: 590px;
+	position: relative;
+	overflow-x: hidden;
+}
+
+#posm-manage td {
+	color: #ccc;
+}
+
+#posm-manage a {
+	color: black;
+	text-decoration: none;
+}
+
+#posm-manage a:focus,
+#posm-manage a:hover {
+	text-decoration: underline;
+}
+
+#posm-manage-add {
+	position: absolute;
+	top: 50px;
+	right: 0;
+}
+
+@media all and (min-width: 400px) {
+
+	#posm-manage-add {
+		top: 92px;
+	}
+
+}
+
+#posm-manage-add a {
+	padding: 8px 11px 7px;
+	border-radius: 7px;
+	background-color: black;
+	color: white;
+}
+
+#posm-manage table {
+	width: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+#posm-manage table th,
+#posm-manage table td {
+	border-bottom: solid 1px #ccc;
+	padding: 7px 0 5px;
+	text-align: left;
+}
+
+#posm-manage table #posm-manage-add-row td {
+	border-bottom: none;
+	opacity: 0.4;
+}
+
+#posm-manage .posm-manage-icons {
+	width: 1px;
+	white-space: nowrap;
+}
+
+.posm-manage-icon {
+	margin-left: 7px;
+	margin-right: 7px;
+	font-size: 18px;
+	color: #666;
+}
+
+#posm-login {
+	max-width: 370px;
+}
+
+#posm-edit {
+	display: block;
+	overflow-x: hidden;
+	max-width: 940px;
+	margin-bottom: 30px;
+	clear: both;
+	padding: 30px 5px 25px;
+	position: relative;
+}
+
+#posm_edit_container {
+	padding: 20px;
+	background-color: rgba(0, 0, 0, 0.6);
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+
+#posm-edit::before {
+	content: '';
+	display: block;
+	height: 20px;
+	background-color: rgba(0, 0, 0, 0.7);
+	background-image: repeating-linear-gradient(315deg, transparent, transparent 35px, rgba(255, 255, 0, 0.8) 35px, rgba(255,255,0,0.8) 70px);
+	border-top-left-radius: 14px;
+	border-top-right-radius: 14px;
+}
+
+#posm_edit_bar_heading {
+	display: none;
+}
+
+@media all and (min-width: 500px) {
+
+	#posm_edit_bar_heading {
+		font-family: Arial, Helvetica, sans-serif;
+		position: absolute;
+		display: block;
+		left: 0;
+		right: 0;
+		top: 0;
+		text-align: center;
+		height: 34px;
+		font-weight: bold;
+		padding-top: 4px;
+		font-size: 23px;
+		text-transform: uppercase;
+		text-shadow: 0 1px 1px #ccc;
+		/*color: #333;*/
+		z-index: -20;
+	}
+
+}
+
+@media all and (min-width: 600px) {
+	#posm-edit {
+		padding: 30px 25px 25px;
+	}
+}
+
+#posm-setup #setupError,
+#posm-add .posm-add-error,
+#posm-delete #posm-delete-error,
+#posm-login div {
+	font-weight: bold;
+	margin-bottom: 20px;
+	color: #eb0000;
+}
+
+#posm-settings h1,
+.posm-manage h1,
+.posm-add-page h1,
+.posm-delete-page h1,
+#posm-setup h1,
+#posm-login h1,
+#posm-edit h1 {
+	font-size: 34px;
+	margin-bottom: 30px;
+	padding-bottom: 10px;
+	border-bottom: solid 1px #333;
+}
+
+#posm-settings h2,
+.posm-manage h2,
+.posm-add-page h2,
+.posm-delete-page h2,
+#posm-setup h2,
+#posm-login h2,
+#posm-edit h2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	font-weight: bold;
+	letter-spacing: 0;
+	text-align: left;
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+
+#posm-settings label,
+#posm-setup label,
+#posm-edit label,
+#posm-add label {
+	/*outline: solid 1px red;*/
+	font-size: 18px;
+	display: inline-block;
+	text-align: left;
+	width: 100%;
+	padding: 5px 5px 5px 3px;
+	color: #777;
+	color: rgba(0, 0, 0, 0.46);
+}
+
+#posm-settings input,
+#posm-setup input,
+#posm-login input,
+#posm-edit input,
+#posm-add input,
+#posm-delete input,
+#posm-settings select,
+#posm-add select,
+#posm-setup select,
+#posm-edit textarea {
+	width: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	margin: 0 0 15px;
+	font-size: 20px;
+	height: 40px;
+	padding: 8px 11px 8px;
+	border: solid 1px #bbb;
+	border: solid 1px rgba(50, 50, 50, 0.2);
+	border-radius: 5px;
+	outline: none;
+}
+
+input#posm_edit_title {
+	font-size: 26px;
+	padding: 11px;
+	height: 47px;
+}
+
+#posm-edit textarea {
+	display: block;
+	height: 250px;
+	font-size: 17px;
+	margin: 0;
+}
+
+#posm-settings,
+#posm-setup,
+#posm-manage,
+#posm-add,
+#posm-delete,
+#posm-login,
+#posm-edit {
+	letter-spacing: normal;
+}
+
+#posm-settings input,
+#posm-setup input,
+#posm-login input,
+#posm-edit input,
+#posm-add input,
+#posm-delete input,
+#posm-edit textarea {
+	-webkit-appearance: none;
+}
+
+#posm-settings input[type="submit"],
+#posm-setup input[type="submit"],
+#posm-login input[type="submit"],
+#posm-edit input[type="submit"],
+#posm-add input[type="submit"],
+#posm-delete input[type="submit"],
+#posm-settings input[type="reset"],
+#posm-setup input[type="reset"],
+#posm-edit input[type="reset"],
+#posm-add input[type="reset"],
+#posm-delete input[type="reset"],
+#posm_cancel {
+	display: inline-block;
+	width: auto;
+	padding: 9px 18px 8px;
+	border-radius: 4px;
+	font-size: 18px;
+	font-weight: normal;
+	color: #444; /* rgba not supported (IE 8) */
+	color: rgba(0, 0, 0, 0.80); /* rgba supported */
+	border: solid 1px #999;  /*IE 6/7/8*/
+	border: solid 1px rgba(50, 50, 50, 0.1);  /*IE9 + everything else*/
+	background-color: #E6E6E6;
+	text-decoration: none;
+	margin-top: 20px;
+	margin-right: 6px;
+	cursor: default;
+}
+
+#posm-settings input:focus,
+#posm-setup input:focus,
+#posm-login input:focus,
+#posm-edit input:focus,
+#posm-add input:focus,
+#posm-delete input:focus,
+#posm-settings select:focus,
+#posm-add select:focus
+#posm-setup select:focus,
+#posm-edit textarea:focus {
+	border: solid 1px #999;
+}
+
+.posm-admin-bar a.posm-adminbar-button:focus,
+#posm-settings input[type="submit"]:focus,
+#posm-setup input[type="submit"]:focus,
+#posm-login input[type="submit"]:focus,
+#posm-edit input[type="submit"]:focus,
+#posm-add input[type="submit"]:focus,
+#posm-delete input[type="submit"]:focus {
+	border: solid 1px #666;
+}
+
+.posm-admin-bar a.posm-adminbar-button:hover,
+#posm-settings input[type="submit"]:hover,
+#posm-setup input[type="submit"]:hover,
+#posm-login input[type="submit"]:hover,
+#posm-edit input[type="submit"]:hover,
+#posm-add input[type="submit"]:hover,
+#posm-delete input[type="submit"]:hover,
+#posm-settings input[type="reset"]:hover,
+#posm-setup input[type="reset"]:hover,
+#posm-edit input[type="reset"]:hover,
+#posm-add input[type="reset"]:hover,
+#posm-delete input[type="reset"]:hover,
+#posm_cancel:hover {
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#1a000000',GradientType=0);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(40%, rgba(0,0,0, 0.05)), to(rgba(0,0,0, 0.10)));
+	background-image: -webkit-linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
+	background-image: -moz-linear-gradient(top, rgba(0,0,0, 0.05) 0%, rgba(0,0,0, 0.10));
+	background-image: -o-linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
+	background-image: linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
+}
+
+#posm-settings input[type="submit"],
+#posm-setup input[type="submit"],
+#posm-edit input[type="submit"],
+#posm-add input[type="submit"],
+#posm-delete input[type="submit"] {
+	color: white;
+	border: none;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+	background: rgb(28, 184, 65);
+}
+
+#posm-delete input[type="submit"] {
+	background: rgb(219, 52, 50);
+}
+
+.posm-admin-bar a.posm-adminbar-button:active,
+#posm-settings input[type="submit"]:active,
+#posm-setup input[type="submit"]:active,
+#posm-login input[type="submit"]:active,
+#posm-edit input[type="submit"]:active,
+#posm-add input[type="submit"]:active,
+#posm-delete input[type="submit"]:active,
+#posm-settings input[type="reset"]:active,
+#posm-setup input[type="reset"]:active,
+#posm-edit input[type="reset"]:active,
+#posm-add input[type="reset"]:active,
+#posm-delete input[type="reset"]:active,
+#posm_cancel:active {
+	box-shadow: 0 0 0 0 rgba(0,0,0, 0.1) inset, 0 0 6px rgba(0,0,0, 0.2) inset;
+}
+
+#posm-setting-success {
+	color: rgb(36, 158, 74);
+	font-weight: bold;
+}
+
+#posm-setting-success * {
+	color: inherit;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#posm-setting-success a span {
+	text-decoration: underline;
+}
+
+#posm-setting-success a:hover span {
+	text-decoration: none;
+}
+
+#posm-setting-success a:focus,
+#posm-setting-success a:active {
+	outline: none;
+	color: rgb(31, 119, 59);
+}
+
+#posm-setting-success a::after {
+	content: '\2192';
+	padding-left: 5px;
+	text-decoration: none;
+}
+
+.posm-edit-field {
+	display: inline-block;
+}
+
+.posm-edit-field:nth-of-type(1) {
+	width: 100%;
+	max-width: 260px;
+	margin-right: 30px;
+}
+
+.posm-edit-field:nth-of-type(2) {
+	width: 100%;
+	max-width: 150px;
+
+}
+
+.posm-edit-field label span {
+	display: block;
+}
+
+#posm-edit hr {
+	border: none;
+	border-top: solid 1px #333;
+}
+
+body.posm-settings #posm_admin_btn_settings,
+body.posm-manage #posm_admin_btn_manage_pages,
+body.posm-add-page #posm_admin_btn_add_page {
+	background-color: #444;
+	color: #ccc;
+}
+
+#posm-add {
+
+}
+
+/* VISUAL EDITOR STUFF */
+
+#posm_body_visual {
+}
+
+#posm_body_visual.visual_mode_on {
+	outline: solid 1px rgba(0, 0, 0, 0.15);
+	outline-offset: 10px;
+	cursor: text;
+}
+
+#posm_body_visual:hover {
+
+}
+
+#posm_body_visual:focus {
+
+}
+
+@media all and (min-width: 600px) {
+
+	#posm-settings,
+	#posm-setup {
+		text-align: left;
+		padding-left: 170px;
+	}
+
+	#posm-settings h1,
+	#posm-setup h1{
+		margin-left: -170px;
+	}
+
+	.posm-initialize p {
+		margin-left: -170px;
+	}
+
+	#posm-settings label,
+	#posm-setup label {
+		display: inline-block;
+		width: 160px;
+		margin-left: -170px;
+		text-align: right;
+		padding-left: 0;
+	}
+
+	#posm-settings input,
+	#posm-setup input,
+	#posm-settings select,
+	#posm-setup select {
+		display: inline-block;
+		width: 395px;
+	}
+
+	#posm-edit textarea {
+		height: 400px;
+	}
+
+}
+
+.hallotoolbar {
+	width: auto !important;
+	margin-top: -10px !important;
+	/*margin-left: -9px !important;*/
+}
+
+.hallotoolbar .ui-buttonset {
+	padding: 4px;
+	display: inline-block;
+	height: 35px;
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+.hallotoolbar .halloheadings {
+	position: relative;
+	top: -1px;
+	margin-bottom: -1px;
+}
+
+.hallotoolbar button {
+	background-color: rgba(0, 0, 0, 0.3);
+	color: black;
+	min-width: 34px;
+	height: 34px;
+	border: none;
+	margin-left: 1px;
+	margin-right: 1px;
+}
+
+.hallotoolbar button.ui-state-active {
+	background-color: #666;
+}
+
+.hallotoolbar button {
+	font-family: Arial, Helvetica, sans-serif !important;
+	font-weight: normal !important;
+}
+
+.hallotoolbar .icon-bold::before {
+	font: normal normal normal 14px/1 FontAwesome;
+	content: '\f032';
+}
+
+.hallotoolbar .icon-italic::before {
+	font: normal normal normal 14px/1 FontAwesome;
+	content: '\f033';
+}
+
+.hallotoolbar .icon-underline::before {
+	font: normal normal normal 14px/1 FontAwesome;
+	content: '\f0cd';
+}
+
+.hallotoolbar .icon-strikethrough::before {
+	font: normal normal normal 14px/1 FontAwesome;
+	content: '\f0cc';
+}
+
+.hallotoolbar .icon-align-left::before {
+	font: normal normal normal 14px/1 FontAwesome;
+	content: '\f036';
+}
+
+.hallotoolbar .icon-align-center::before {
+	font: normal normal normal 14px/1 FontAwesome;
+	content: '\f037';
+}
+
+.hallotoolbar .icon-align-right::before {
+	font: normal normal normal 14px/1 FontAwesome;
+	content: '\f038';
+}
+
+.hallotoolbar .icon-align-justify::before {
+	font: normal normal normal 14px/1 FontAwesome;
+	content: '\f039';
+}
+
+.hallotoolbar .icon-list-ul::before {
+	font: normal normal normal 14px/1 FontAwesome;
+	content: '\f0ca';
+}
+
+.hallotoolbar .icon-list-ol::before {
+	font: normal normal normal 14px/1 FontAwesome;
+	content: '\f0cb';
+}
+
+.hallotoolbar .icon-undo::before {
+	font: normal normal normal 14px/1 FontAwesome;
+	content: '\f0e2';
+}
+
+.hallotoolbar .icon-repeat::before {
+	font: normal normal normal 14px/1 FontAwesome;
+	content: '\f01e';
+}
