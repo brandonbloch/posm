@@ -5,7 +5,6 @@ function posm_manage_pages($directory = "/", $level = 1) {
 
 	if (count($files) > 0) {
 		$files = array_values($files);
-		// TODO remember to use the next line to display the pages in proper order!
 		$files = order_sort($files, substr($directory, 1));
 		$index = array_search("index.txt", $files);
 		if ($index !== false) {

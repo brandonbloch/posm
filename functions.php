@@ -162,19 +162,19 @@ function posm_email() {
 
 function get_posm_theme() {
 	global $posm_settings;
+	$default_theme = "bootstrap";
 	if (isset($posm_settings['theme'])) {
 		if (file_exists("posm_themes/" . $posm_settings['theme'] . "/index.php")) {
 			return $posm_settings['theme'];
 		} else {
-			$posm_settings['theme'] = "awesome_posm";
+			$posm_settings['theme'] = $default_theme;
 			return $posm_settings['theme'];
 		}
 	} else {
-		$posm_settings['theme'] = "awesome_posm";
+		$posm_settings['theme'] = $default_theme;
 		return $posm_settings['theme'];
 	}
 }
-// TODO fallback so that if the selected theme's folder doesn't exist (ie. was moved/deleted) the default theme is used
 
 function get_page_title() {
 	if (isset($_GET['page'])) {
@@ -384,7 +384,8 @@ function posm_tree($directory, $options = array(), $is_root = true) {
 							}
 						}
 					} else {
-						// TODO decide what happens if no index page exists
+						// No index.txt file exists, somehow.
+						// This shouldn't happen unless the user manually deletes the file.
 					}
 				}
 				foreach ( $files as $file ) {
@@ -479,10 +480,6 @@ function posm_children($root, $options = array()) {
 	posm_tree("posm_content/pages/$root", $options);
 }
 
-// TODO write a function that returns the top-level navigation menu as an array of links
-// TODO and a function to return the children of a given parent as an array of links
-
-
 function has_children($permalink) {
 	if ($permalink == "index") {
 		return true;
@@ -554,13 +551,6 @@ function posm_content() {
 
 	}
 }
-// TODO use a set of more informative error messages
-// - can the page be set to 404 mode at this point in time?
-// - if not, maybe this should be done in auth.php
-//   - a similar function to check the status of the file, and set HTTP headers while still possible
-
-// TODO perhaps write a set of function headers for the public POSM functions
-// - could be included in a theme file for use during development
 
 
 /**
@@ -653,33 +643,3 @@ function posm_admin_bar() {
 		echo '</div></div>';
 	}
 }
-
-// TODO make sure all form input and URL parameters are relevantly sanitized
-// - test this thoroughly and make sure no code can be injected whatsoever!!!
-// - possibly only allow a restricted set of characters for the username/password
-
-// TODO try to break into the website, and see if there are any holes
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// TODO two permalink functions, to be used throughout the site immediately
-// 1. return the actual permalink, after checking URL parameters for emptiness and paths and whatnot
-// 2. check what type of page is being requested (viewing, editing, login, logout, settings, and so on)
-//
-// they will replace a lot of redundant if/elseif/ statements throughout the project
-// - they will also ensure error and value checking happen more consistently

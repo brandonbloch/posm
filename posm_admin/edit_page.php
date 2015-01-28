@@ -95,7 +95,7 @@ $thisData = get_posm_metadata($permalink);
 		visualarea.hallo({
 			plugins: {
 				'halloheadings': {
-					// TODO figure out how to customize this properly
+					// figure out how to customize this properly (I can't understand the API)
 				},
 				'halloformat': {
 					'formattings': {
