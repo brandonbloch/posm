@@ -66,7 +66,7 @@ if (isset($_POST['setupSubmit'])) {
 					} else { // if the login file was written successfully
 						$settings = array(
 							'title' => $_POST['siteTitle'],
-							'theme' => 'awesome_posm',
+							'theme' => 'bootstrap',
 							'email' => $_POST['setupEmail'],
 						);
 						if (isset($_POST['siteSubtitle'])) {
