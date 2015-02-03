@@ -9,7 +9,7 @@ of the website to be able to change anything down the road, when they will surel
 
 Everything should be simple, transparent, and straightforward. The following features attempt to apply that:
 
-## You got back end on my front end
+## No back end?
 
 The only thing that isn't obvious is how to log in to the website—this is how it should be, so users don't find the
 login form. All it means is that the site administrator needs to keep track of three things: the login URL (which is
