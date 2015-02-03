@@ -40,6 +40,7 @@ function _create_hash($password, $salt) {
 	return $hash;
 }
 
+// Return the client's IP address (for use when checking session validity)
 function get_ip_address() {
 	$ip_keys = array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR');
 	foreach ($ip_keys as $key) {
@@ -76,7 +77,8 @@ function trimIP($ip) {
 	return $ip . '0';
 }
 
-// if print_r($array, true) returns $string, print_r_reverse($string) returns $array
+// undoes what print_r does - turns a string into an array
+// - if print_r($array, true) returns $string, then print_r_reverse($string) will return $array
 function print_r_reverse($in) {
 	$lines = explode("\n", trim($in));
 	if (trim($lines[0]) != 'Array') {
@@ -188,11 +190,16 @@ function posm_write_file($file, $data, $newMetadata, $newFile = false) {
 
 
 
+////
+// End of functions, start of page execution
+////
 
-// before anything, check whether the user is currently logged in to the site
+
+
 
 session_start();
 
+// before anything, check whether the user is currently logged in to the site
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false) { // if not logged in, set session variables
 
 	$_SESSION['ip_address'] = trimIP(get_ip_address()) ;
@@ -202,7 +209,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false) { // if n
 } else { // if logged in, check session validity
 
 	// if there has been no activity for 30 minutes, destroy the session
-	// otherwise, update the last activity time
+	// else, update the last activity time
 	if (time() > $_SESSION['last_activity'] + 30 * 60) {
 		session_unset();
 		session_destroy();
@@ -221,8 +228,8 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false) { // if n
 				session_destroy();
 			} else {
 
-				// if we make it this far, the session is still valid
-
+				// if we make it this far, the session is still valid. Woohoo!
+				// - any additional checks that may be added in the future should be added in here
 			}
 
 		}
@@ -250,7 +257,7 @@ if (isset($_GET['logout'])) {
 
 $errorMSG = "";
 
-// If the login form was submitted, authenticate the form data
+// if the user submitted a login form, authenticate the form data
 if (isset($_POST['posm_login_submit'])) {
 	if (empty($_POST['posm_login_username'])) {
 		$errorMSG = "Enter a username.";
@@ -290,6 +297,7 @@ if (isset($_POST['posm_login_submit'])) {
 	}
 }
 
+// if the user attempted to view the Add Page screen, check authentication and load the page
 if (isset($_GET['add'])) {
 	if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false) {
 		if (!isset($_GET['login'])) {
@@ -301,6 +309,7 @@ if (isset($_GET['add'])) {
 	}
 }
 
+// if the user attempted to view the Delete Page screen, check authentication and load the page
 if (isset($_GET['delete'])) {
 	if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false) {
 		header( 'Location: ' . get_posm_url() . "/?manage" );
@@ -310,6 +319,7 @@ if (isset($_GET['delete'])) {
 	}
 }
 
+// if the user attempted to view the Manage Pages screen, check authentication and load the page
 if (isset($_GET['manage'])) {
 	if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false) {
 		if (!isset($_GET['login'])) {
@@ -321,7 +331,7 @@ if (isset($_GET['manage'])) {
 	}
 }
 
-// if the settings administration page is requested, check authentication and load the page
+// if the attempted to view the Settings screen, check authentication and load the page
 if (isset($_GET['settings'])) {
 	if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false) {
 		if (!isset($_GET['login'])) {

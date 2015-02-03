@@ -4,6 +4,8 @@ ini_set("auto_detect_line_endings", true);
 
 $posm_settings = parse_ini_file("posm_admin/settings.txt");
 
+// Moves an element of an array at a given position to another position
+// (used in add_page.php, manage_pages.php)
 function moveValueByIndex( array $array, $from = null, $to = null ) {
 	if ( null === $from ) {
 		$from = count( $array ) - 1;
@@ -26,9 +28,18 @@ function moveValueByIndex( array $array, $from = null, $to = null ) {
 	return $array;
 }
 
+// Appends a class to a list of HTML classes (for use in the HTML class="" attribute)
+function class_append($classes, $class) {
+	if ($classes == "") {
+		$classes = $class;
+	} else {
+		$classes = $classes . " " . $class;
+	}
+	return $classes;
+}
+
 /**
  * Returns the path of the active theme's directory
- * @return string   Path to the directory of the current theme
  */
 function get_posm_theme_path() {
 	return "posm_themes/" . get_posm_theme();
@@ -56,17 +67,8 @@ function posm_style_include() {
 	echo '<link rel="stylesheet" type="text/css" href="' . get_posm_theme_path() . '/style.css">';
 }
 
-function class_append($classes, $class) {
-	if ($classes == "") {
-		$classes = $class;
-	} else {
-		$classes = $classes . " " . $class;
-	}
-	return $classes;
-}
-
 /**
- * Echoes the current POSM page classes, to be used for styling
+ * Echoes the current POSM page classes, required for properly styling the backend
  */
 function posm_body_classes() {
 	$classes = "";
@@ -94,7 +96,6 @@ function posm_body_classes() {
 
 /**
  * Returns the site title
- * @return string   Site title
  */
 function get_posm_title() {
 	global $posm_settings;
@@ -111,7 +112,6 @@ function posm_title() {
 
 /**
  * Returns the site subtitle
- * @return string   Site subtitle
  */
 function get_posm_subtitle() {
 	global $posm_settings;
@@ -128,7 +128,6 @@ function posm_subtitle() {
 
 /**
  * Returns the site author
- * @return string   Site author
  */
 function get_posm_author() {
 	global $posm_settings;
@@ -145,7 +144,6 @@ function posm_author() {
 
 /**
  * Returns the admin email address
- * @return string   Admin email
  */
 function get_posm_email() {
 	global $posm_settings;
@@ -160,6 +158,8 @@ function posm_email() {
 	echo $posm_settings['email'];
 }
 
+// Return the name of the currently selected theme
+// - not sure if this should be a public function or not
 function get_posm_theme() {
 	global $posm_settings;
 	$default_theme = "bootstrap";
@@ -176,6 +176,9 @@ function get_posm_theme() {
 	}
 }
 
+/**
+ * Return the title of the current page
+ */
 function get_page_title() {
 	if (isset($_GET['page'])) {
 		$permalink = urldecode($_GET['page']);
@@ -199,16 +202,21 @@ function get_page_title() {
 	}
 }
 
+/**
+ * Echo the title of the current page
+ */
 function page_title() {
 	echo get_page_title();
 }
 
+// Get the root URL of the current POSM installation
 function get_posm_url() {
 	$path = str_replace('\\', '/', __DIR__);
 	$path = str_replace($_SERVER['DOCUMENT_ROOT'], '', $path);
 	return $path;
 }
 
+// Turn a file path into a POSM link (for use in the ?page= URL parameter)
 function generate_posm_link($path) {
 	$path = str_replace(get_posm_url() . "/", '', $path);
 	$path = str_replace("posm_content/pages/", "", $path);
@@ -218,6 +226,7 @@ function generate_posm_link($path) {
 	return $link;
 }
 
+// Return a page's metadata as an array, or a specific metadata value if a field is specified
 function get_posm_metadata($file, $field = false) {
 	$metadata = array();
 	if ($file[0]== '/') {
@@ -253,7 +262,7 @@ function get_posm_metadata($file, $field = false) {
 	} else {
 		return null;
 	}
-	// default setting merging
+	// merge default settings
 	$defaults = array(
 		'title' => str_replace(".txt", "", basename($file)),
 		'order' => 0,
@@ -271,6 +280,7 @@ function get_posm_metadata($file, $field = false) {
 	}
 }
 
+// Sort an array of files based on their order setting (metadata value)
 function order_sort($files, $dir) {
 	$dir = preg_replace("#posm_content/pages#", "", $dir);
 	$sorted = [];
@@ -312,6 +322,8 @@ function order_sort($files, $dir) {
 	return $sorted;
 }
 
+// Recursively list the files in a directory (used by posm_nav and posm_children)
+// - there are various options available, and these can be passed in from posm_nav and posm_children as well
 function posm_tree($directory, $options = array(), $is_root = true) {
 
 	// Merge options
@@ -480,6 +492,8 @@ function posm_children($root, $options = array()) {
 	posm_tree("posm_content/pages/$root", $options);
 }
 
+// Check if a page has children or not
+// - used by manage_page to decide if a page can be deleted or not (pages with children cannot be deleted)
 function has_children($permalink) {
 	if ($permalink == "index") {
 		return true;
@@ -502,6 +516,7 @@ function has_children($permalink) {
 
 /**
  * Echoes the main page content
+ * - this function must be called somewhere in a site theme, as it contains all page-specific content!
  */
 function posm_content() {
 	if ( isset( $_GET['login'] ) ) {            // if the login form page is requested
@@ -554,7 +569,8 @@ function posm_content() {
 
 
 /**
- * Returns a logout URL that generally preserves the user's location
+ * Returns a logout URL that does its best to preserve the user's location
+ * - works in conjunction with appropriate parameter checking in auth.php
  * @return string   Logout URL
  */
 function get_posm_logout_link() {
