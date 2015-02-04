@@ -400,6 +400,7 @@ function posm_tree($directory, $options = array(), $is_root = true) {
 						// This shouldn't happen unless the user manually deletes the file.
 					}
 				}
+				$aClass = "";
 				foreach ( $files as $file ) {
 					$filePath    = "$directory/$file";
 					$itemClasses = "";
