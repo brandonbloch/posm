@@ -60,8 +60,7 @@ function get_ip_address() {
 }
 
 // Ensures an ip address is both a valid IP and does not fall within a private network range.
-function validate_ip($ip)
-{
+function validate_ip($ip) {
 	if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false) {
 		return false;
 	}
@@ -124,17 +123,6 @@ function print_r_reverse($in) {
 		}
 		return $ret;
 	}
-}
-
-// Echoes a login form
-function posm_login_form() {
-	global $errorMSG;
-	echo '<form id="posm-login" action="" method="post">' .
-	     '<div>' . $errorMSG . '</div>' .
-	     '<input name="posm_login_username" placeholder="username" type="text" value="' . htmlentities($_POST['username']) . '">' .
-	     '<input name="posm_login_password" placeholder="password" type="password">' .
-	     '<input name="posm_login_submit" type="submit" value="Sign In">' .
-	     '</form>';
 }
 
 // Page Edit - read function
@@ -295,6 +283,21 @@ if (isset($_POST['posm_login_submit'])) {
 			}
 		}
 	}
+}
+
+// Echoes a login form
+function posm_login_form() {
+	global $errorMSG;
+	$usernameAttempt = "";
+	if (isset($_POST['username']) && !empty($_POST['username'])) {
+		$usernameAttempt = htmlentities($_POST['username']);
+	}
+	echo '<form id="posm-login" action="" method="post">' .
+	     '<div>' . $errorMSG . '</div>' .
+	     '<input name="posm_login_username" placeholder="username" type="text" value="' . $usernameAttempt . '">' .
+	     '<input name="posm_login_password" placeholder="password" type="password">' .
+	     '<input name="posm_login_submit" type="submit" value="Sign In">' .
+	     '</form>';
 }
 
 // if the user attempted to view the Add Page screen, check authentication and load the page

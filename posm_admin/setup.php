@@ -86,6 +86,29 @@ if (isset($_POST['setupSubmit'])) {
 
 }
 
+$siteTitle = "";
+$siteSubtitle = "";
+$setupUser = "";
+$setupEmail = "";
+$setupEmail2 = "";
+
+if (isset($_POST['siteTitle']) && !empty($_POST['siteTitle'])) {
+	$siteTitle = htmlentities($_POST['siteTitle']);
+}
+if (isset($_POST['siteSubtitle']) && !empty($_POST['siteSubtitle'])) {
+	$siteSubtitle = htmlentities($_POST['siteSubtitle']);
+}
+if (isset($_POST['setupUser']) && !empty($_POST['setupUser'])) {
+	$setupUser = htmlentities($_POST['setupUser']);
+}
+if (isset($_POST['setupEmail']) && !empty($_POST['setupEmail'])) {
+	$setupEmail = htmlentities($_POST['setupEmail']);
+}
+if (isset($_POST['setupEmail2']) && !empty($_POST['setupEmail2'])) {
+	$setupEmail2 = htmlentities($_POST['setupEmail2']);
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -110,27 +133,27 @@ if (isset($_POST['setupSubmit'])) {
 		<h2>Site Settings</h2>
 
 		<label for="siteTitle">Title</label>
-		<input name="siteTitle" id="siteTitle" placeholder="My Website" type="text" value="<?php echo htmlentities($_POST['siteTitle']) ?>">
+		<input name="siteTitle" id="siteTitle" placeholder="My Website" type="text" value="<?php echo $siteTitle ?>">
 		<br>
 		<label for="siteSubtitle">Description</label>
-		<input name="siteSubtitle" id="siteSubtitle" placeholder="Optional" type="text" value="<?php echo htmlentities($_POST['siteSubtitle']) ?>">
+		<input name="siteSubtitle" id="siteSubtitle" placeholder="Optional" type="text" value="<?php echo $siteSubtitle ?>">
 
 		<h2>Create Account</h2>
 
 		<label for="setupUser">Username</label>
-		<input name="setupUser" id="setupUser" placeholder="username (6-20 letters/numbers)" type="text" value="<?php echo htmlentities($_POST['setupUser']) ?>">
+		<input name="setupUser" id="setupUser" placeholder="username (6-20 letters/numbers)" type="text" value="<?php echo $setupUser ?>">
 		<br>
 		<label for="setupEmail">Admin Email</label>
-		<input name="setupEmail" id="setupEmail" placeholder="me@example.com" type="email" value="<?php echo htmlentities($_POST['setupEmail']) ?>">
+		<input name="setupEmail" id="setupEmail" placeholder="me@example.com" type="email" value="<?php echo $setupEmail ?>">
 		<br>
 		<label for="setupEmail2">Confirm Email</label>
-		<input name="setupEmail2" id="setupEmail2" placeholder="me@example.com" type="email" value="<?php echo htmlentities($_POST['setupEmail2']) ?>">
+		<input name="setupEmail2" id="setupEmail2" placeholder="me@example.com" type="email" value="<?php echo $setupEmail2 ?>">
 		<br>
 		<label for="setupPass">Password</label>
-		<input name="setupPass" id="setupPass" placeholder="••••••• (8-30 letters/numbers)" type="password">
+		<input name="setupPass" id="setupPass" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull; (8-30 letters/numbers)" type="password">
 		<br>
 		<label for="setupPass2">Confirm Password</label>
-		<input name="setupPass2" id="setupPass2" placeholder="•••••••" type="password">
+		<input name="setupPass2" id="setupPass2" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;" type="password">
 
 		<br>
 		<input name="setupSubmit" id="setupSubmit" type="submit" value="Create Account">

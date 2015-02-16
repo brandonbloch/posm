@@ -1,8 +1,23 @@
 <?php
 
-if (isset($_POST['posm_addpage_submit'])) {
+$trimTitle = "";
+$trimShortname = "";
+$error = "";
+$pageOrder = 0;
+
+if (isset($_POST['posm_edit_title'])) {
 	$trimTitle = trim($_POST['posm_edit_title']);
+}
+if (isset($_POST['posm_edit_shortname'])) {
 	$trimShortname = trim($_POST['posm_edit_shortname']);
+}
+if (isset($_POST['posm_edit_order'])) {
+	if (is_numeric($_POST['posm_edit_order'])) {
+		$pageOrder = intval($_POST['posm_edit_order']);
+	}
+}
+
+if (isset($_POST['posm_addpage_submit'])) {
 
 	if (empty($trimTitle)) {
 		$error = "You must give the page a title.";
@@ -183,17 +198,17 @@ function posm_choose_parent($directory = "/", $level = 0) {
 
 			<div class="posm-edit-field">
 				<label for="posm_edit_shortname"><span>Page Shortname</span> <span>(displayed in menus)</span></label>
-				<input name="posm_edit_shortname" id="posm_edit_shortname" placeholder="Shortname" value="<?php echo $_POST['posm_edit_shortname'] ?>">
+				<input name="posm_edit_shortname" id="posm_edit_shortname" placeholder="Shortname" value="<?php echo $trimShortname ?>">
 			</div>
 
 			<div class="posm-edit-field">
 				<label for="posm_edit_order"><span>Sort Order</span> <span>(1, 2, 3... then 0)</span></label>
-				<input name="posm_edit_order" id="posm_edit_order" placeholder="0" type="number" min="0" value="<?php echo $_POST['posm_edit_order'] ?>">
+				<input name="posm_edit_order" id="posm_edit_order" placeholder="0" type="number" min="0" value="<?php echo $pageOrder ?>">
 			</div>
 		</div>
 
 		<input name="posm_addpage_submit" type="submit" value="Create">
-		<a href="<?php echo $_SERVER['HTTP_REFERER'] ?>" id="posm_cancel">Cancel</a>
+		<a href="<?php if(isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) echo $_SERVER['HTTP_REFERER'] ?>" id="posm_cancel">Cancel</a>
 
 	</form>
 

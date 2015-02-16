@@ -73,7 +73,7 @@ function posm_style_include() {
 function posm_body_classes() {
 	$classes = "";
 	// add a class for posm-home (if homepage) or posm-page (if not)
-	if ( isset( $_GET['page'] ) ) {
+	if ( isset($_GET['page']) && !empty($_GET['page']) ) {
 		$permalink = urldecode($_GET['page']);
 		if (substr($permalink, -1) == "/") {
 			$permalink = substr($permalink, 0, -1);
@@ -88,7 +88,7 @@ function posm_body_classes() {
 		$classes = class_append($classes, "posm-home");
 	}
 	// add a class if the user is logged in
-	if ($_SESSION['logged_in']) {
+	if (isset($_SESSION['logged_in']) && !empty($_SESSION['logged_in'])) {
 		$classes = class_append($classes, "logged-in");
 	}
 	echo $classes;
@@ -99,15 +99,17 @@ function posm_body_classes() {
  */
 function get_posm_title() {
 	global $posm_settings;
-	return $posm_settings['title'];
+	if (isset($posm_settings['title']) && !empty($posm_settings['title'])) {
+		return $posm_settings['title'];
+	}
+	return;
 }
 
 /**
  * Echoes the site title
  */
 function posm_title() {
-	global $posm_settings;
-	echo $posm_settings['title'];
+	echo get_posm_title();
 }
 
 /**
@@ -115,15 +117,17 @@ function posm_title() {
  */
 function get_posm_subtitle() {
 	global $posm_settings;
-	return $posm_settings['subtitle'];
+	if (isset($posm_settings['subtitle']) && !empty($posm_settings['subtitle'])) {
+		return $posm_settings['subtitle'];
+	}
+	return;
 }
 
 /**
  * Echoes the site subtitle
  */
 function posm_subtitle() {
-	global $posm_settings;
-	echo $posm_settings['subtitle'];
+	echo get_posm_subtitle();
 }
 
 /**
@@ -131,15 +135,17 @@ function posm_subtitle() {
  */
 function get_posm_author() {
 	global $posm_settings;
-	return $posm_settings['author'];
+	if (isset($posm_settings['author']) && !empty($posm_settings['author'])) {
+		return $posm_settings['author'];
+	}
+	return;
 }
 
 /**
  * Echoes the site author
  */
 function posm_author() {
-	global $posm_settings;
-	echo $posm_settings['author'];
+	echo get_posm_author();
 }
 
 /**
@@ -147,15 +153,17 @@ function posm_author() {
  */
 function get_posm_email() {
 	global $posm_settings;
-	return $posm_settings['email'];
+	if (isset($posm_settings['email']) && !empty($posm_settings['email'])) {
+		return $posm_settings['email'];
+	}
+	return;
 }
 
 /**
  * Echoes the admin email address
  */
 function posm_email() {
-	global $posm_settings;
-	echo $posm_settings['email'];
+	echo get_posm_email();
 }
 
 // Return the name of the currently selected theme
@@ -236,29 +244,33 @@ function get_posm_metadata($file, $field = false) {
 	} else {
 		$path = "posm_content/pages/$file";
 	}
-	$handle = fopen($path, "r");
-	if ($handle) {
-		while (($line = fgets($handle)) !== false && !stristr($line, "POSM-->")) {
-			if (!stristr($line, "<!--")) {
-				$lineParts = explode("---", $line, 2);
-				$lineParts[0] = strtolower(trim($lineParts[0]));
-				if (count($lineParts) > 1) {
-					$lineParts[1] = trim($lineParts[1]);
-					if (ctype_digit($lineParts[1])) {
-						$lineParts[1] = intval($lineParts[1]);
-					} elseif (is_numeric($lineParts[1])) {
-						$lineParts[1] = floatval($lineParts[1]);
+	if (file_exists($path)) {
+		$handle = fopen($path, "r");
+		if ($handle) {
+			while (($line = fgets($handle)) !== false && !stristr($line, "POSM-->")) {
+				if (!stristr($line, "<!--")) {
+					$lineParts = explode("---", $line, 2);
+					$lineParts[0] = strtolower(trim($lineParts[0]));
+					if (count($lineParts) > 1) {
+						$lineParts[1] = trim($lineParts[1]);
+						if (ctype_digit($lineParts[1])) {
+							$lineParts[1] = intval($lineParts[1]);
+						} elseif (is_numeric($lineParts[1])) {
+							$lineParts[1] = floatval($lineParts[1]);
+						}
+						$metadata[$lineParts[0]] = $lineParts[1];
+					} else {
+						$metadata[$lineParts[0]] = false;
 					}
-					$metadata[$lineParts[0]] = $lineParts[1];
-				} else {
-					$metadata[$lineParts[0]] = false;
-				}
-				if ($field && $lineParts[0] == $field) {
-					return $lineParts[1];
+					if ($field && $lineParts[0] == $field) {
+						return $lineParts[1];
+					}
 				}
 			}
+			fclose($handle);
+		} else {
+			return null;
 		}
-		fclose($handle);
 	} else {
 		return null;
 	}
