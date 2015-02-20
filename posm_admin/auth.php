@@ -337,11 +337,23 @@ function posm_login_form() {
 	     '</form>';
 }
 
+if (isset($_GET['edit'])) {
+	$file = urldecode($_GET['edit']);
+	if (substr($file, -1) == "/") {
+		$file = $file . "index.txt";
+	} else {
+		$file = $file . ".txt";
+	}
+	if (!file_exists("posm_content/pages/" . $file)) {
+		header('Location: ' . get_posm_url());
+	}
+}
+
 // if the user attempted to view the Add Page screen, check authentication and load the page
 if (isset($_GET['add'])) {
 	if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false) {
 		if (!isset($_GET['login'])) {
-			header( 'Location: ' . get_posm_url() . "/?login&add" );
+			header('Location: ' . get_posm_url() . "/?login&add");
 		}
 	} else {
 		include_once "posm_admin/add_page.php";
@@ -352,7 +364,7 @@ if (isset($_GET['add'])) {
 // if the user attempted to view the Delete Page screen, check authentication and load the page
 if (isset($_GET['delete'])) {
 	if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false) {
-		header( 'Location: ' . get_posm_url() . "/?manage" );
+		header('Location: ' . get_posm_url() . "/?manage");
 	} else {
 		include_once "posm_admin/delete_page.php";
 		die();
@@ -363,7 +375,7 @@ if (isset($_GET['delete'])) {
 if (isset($_GET['manage'])) {
 	if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false) {
 		if (!isset($_GET['login'])) {
-			header( 'Location: ' . get_posm_url() . "/?login&manage" );
+			header('Location: ' . get_posm_url() . "/?login&manage");
 		}
 	} else {
 		include_once "posm_admin/manage_pages.php";
