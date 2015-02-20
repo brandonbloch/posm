@@ -10,6 +10,9 @@ if (isset($_GET['delete'])) {
 		$file = $permalink . ".txt";
 		$dir = false;
 	}
+	if (!file_exists("posm_content/pages/" . $file)) {
+		header('Location: ' . get_posm_url());
+	}
 	if (isset($_POST['posm_delete_submit'])) {
 		if ($dir) {
 			$success = unlink("posm_content/pages/" . $file);

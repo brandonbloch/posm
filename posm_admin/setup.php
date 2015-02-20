@@ -69,7 +69,7 @@ if (isset($_POST['setupSubmit'])) {
 							'theme' => 'bootstrap',
 							'email' => $_POST['setupEmail'],
 						);
-						if (isset($_POST['siteSubtitle'])) {
+						if (isset($_POST['siteSubtitle']) && !empty($_POST['siteSubtitle'])) {
 							$settings['subtitle'] = $_POST['siteSubtitle'];
 						}
 						write_ini_file($settings, "posm_admin/settings.txt");
@@ -116,7 +116,7 @@ if (isset($_POST['setupEmail2']) && !empty($_POST['setupEmail2'])) {
 	<head lang="en">
 		<meta charset="UTF-8">
 		<meta name="viewport" content="initial-scale=1.0, width=device-width">
-		<title>Get Started - POSM</title>
+		<title>Get Started with POSM</title>
 		<link rel="stylesheet" type="text/css" href="css/defaults.css">
 	</head>
 
