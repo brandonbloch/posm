@@ -225,6 +225,43 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false) { // if n
 	}
 }
 
+// Un-parse a URL (taken from comments at http://php.net/parse_url)
+function unparse_url($parsed_url) { 
+  $scheme   = isset($parsed_url['scheme']) ? $parsed_url['scheme'] . '://' : ''; 
+  $host     = isset($parsed_url['host']) ? $parsed_url['host'] : ''; 
+  $port     = isset($parsed_url['port']) ? ':' . $parsed_url['port'] : ''; 
+  $user     = isset($parsed_url['user']) ? $parsed_url['user'] : ''; 
+  $pass     = isset($parsed_url['pass']) ? ':' . $parsed_url['pass']  : ''; 
+  $pass     = ($user || $pass) ? "$pass@" : ''; 
+  $path     = isset($parsed_url['path']) ? $parsed_url['path'] : ''; 
+  $query    = isset($parsed_url['query']) ? '?' . $parsed_url['query'] : ''; 
+  $fragment = isset($parsed_url['fragment']) ? '#' . $parsed_url['fragment'] : ''; 
+  return "$scheme$user$pass$host$port$path$query$fragment"; 
+}
+
+// remove a single URL parameter from a given URL
+// http://stackoverflow.com/questions/4937478/strip-off-url-parameter-with-php
+function remove_parameter($url, $varname) {
+	$parsed_url = parse_url($url);
+	$params = array();
+	parse_str($parsed_url['query'], $params);
+	unset($params['login']);
+	$query = http_build_query($params);
+	if ($query == "") {
+		unset($parsed_url['query']);
+	} else {
+		$parsed_url['query'] = $query;
+	}
+    return unparse_url($parsed_url);
+}
+
+// if the user requested a login page while logged in, pass them through
+if (isset($_GET['login'])) {
+	if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
+		header( 'Location: ' . remove_parameter($_SERVER['REQUEST_URI'], "login") );
+	}
+}
+
 // if the user clicked a logout link, destroy their session and return home
 if (isset($_GET['logout'])) {
 	session_unset();

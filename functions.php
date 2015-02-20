@@ -532,9 +532,9 @@ function has_children($permalink) {
  * - this function must be called somewhere in a site theme, as it contains all page-specific content!
  */
 function posm_content() {
-	if ( isset( $_GET['login'] ) ) {            // if the login form page is requested
+	if (isset($_GET['login'])) {            // if the login form page is requested
 		posm_login_form();
-	} elseif ( isset( $_GET['edit'] ) ) {       // if the page is to be edited
+	} elseif (isset($_GET['edit'])) {       // if the page is to be edited
 		if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] == false) {
 			posm_login_form();
 		} else {
